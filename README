@@ -1,0 +1,13 @@
+Thunar File Name Repairer plugin
+================================
+
+- This is an Alpha release
+- This is an incomplete port of Nautilus Filename Repairer (https://code.google.com/p/repairer/)
+- Some features are still missing like the 'Repair Dialog'
+- Translations are not yet available
+
+Thanks to:
+----------
+- Choe Hwanjin
+- Peter de Ridder
+
