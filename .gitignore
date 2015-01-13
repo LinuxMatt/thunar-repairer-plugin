@@ -30,3 +30,5 @@ missing
 mkinstalldirs
 Makefile.in.in
 POTFILES
+compile
+configure.ac
