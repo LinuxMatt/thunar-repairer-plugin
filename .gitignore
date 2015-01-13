@@ -1,29 +1,32 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
+*.gmo
+*.pot
+Makefile
+Makefile.in
+stamp-*
+*.tar.bz2
+*.tar.gz
+.deps
+.libs
 *.la
 *.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+*.o
+ChangeLog
+INSTALL
+aclocal.m4
+autom4te.cache
+config.guess
+config.h
+config.h.in
+config.log
+config.status
+config.sub
+configure
+configure.in
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+mkinstalldirs
+Makefile.in.in
+POTFILES

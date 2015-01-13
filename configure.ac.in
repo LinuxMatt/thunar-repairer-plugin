@@ -1,0 +1,114 @@
+# vi:set et ai sw=2 sts=2 ts=2: */
+# -
+# Copyright (c) 2006-2011 Benedikt Meurer <benny@xfce.org>
+# Copyright (c) 2011      Jannis Pohlmann <jannis@xfce.org>
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General
+# Public License along with this library; if not, write to the
+# Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+# Boston, MA 02110-1301, USA.
+
+dnl ***************************
+dnl *** Version information ***
+dnl ***************************
+m4_define([fnr_version_major], [0])
+m4_define([fnr_version_minor], [1])
+m4_define([fnr_version_micro], [0])
+m4_define([fnr_version_build], [@REVISION@])
+m4_define([fnr_version_tag], [git])
+m4_define([fnr_version], [fnr_version_major().fnr_version_minor().fnr_version_micro()ifelse(fnr_version_tag(), [], [], [fnr_version_tag()-fnr_version_build()])])
+
+dnl *******************************************
+dnl *** Debugging support for Git snapshots ***
+dnl *******************************************
+m4_define([fnr_debug_default], [ifelse(fnr_version_tag(), [git], [yes], [minimum])])
+
+dnl ***************************
+dnl *** Initialize autoconf ***
+dnl ***************************
+AC_COPYRIGHT([Copyright (c) 2014 The Thunar development team. All rights reserved.])
+AC_INIT([thunar-fnr-plugin], [fnr_version], [thunar-dev@xfce.org])
+AC_PREREQ([2.50])
+AC_CANONICAL_TARGET()
+AC_REVISION([@REVISION@])
+
+dnl ***************************
+dnl *** Initialize automake ***
+dnl ***************************
+AM_INIT_AUTOMAKE([1.8 dist-bzip2 tar-ustar no-dist-gzip])
+AC_CONFIG_HEADERS([config.h])
+AM_MAINTAINER_MODE()
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+dnl *******************************
+dnl *** Check for UNIX variants ***
+dnl *******************************
+AC_AIX()
+AC_ISC_POSIX()
+AC_MINIX()
+
+dnl ********************************
+dnl *** Check for basic programs ***
+dnl ********************************
+AC_PROG_CC()
+AC_PROG_LD()
+AC_PROG_INSTALL()
+AC_PROG_INTLTOOL()
+
+dnl **************************
+dnl *** Initialize libtool ***
+dnl **************************
+LT_PREREQ([2.2.6])
+LT_INIT([disable-static])
+
+dnl ******************************
+dnl *** Check for i18n support ***
+dnl ******************************
+XDT_I18N([@LINGUAS@])
+
+dnl ***********************************
+dnl *** Check for required packages ***
+dnl ***********************************
+XDT_CHECK_PACKAGE([THUNARX], [thunarx-2], [0.4.0])
+XDT_CHECK_PACKAGE([EXO], [exo-1], [0.5.0])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.6.0])
+
+dnl ***********************************
+dnl *** Check for debugging support ***
+dnl ***********************************
+XDT_FEATURE_DEBUG([fnr_debug_default])
+
+dnl **************************************
+dnl *** Check for linker optimizations ***
+dnl **************************************
+XDT_FEATURE_LINKER_OPTS()
+
+dnl *********************************
+dnl *** Substitute platform flags ***
+dnl *********************************
+AC_MSG_CHECKING([PLATFORM_CPPFLAGS])
+AC_MSG_RESULT([$PLATFORM_CPPFLAGS])
+AC_SUBST([PLATFORM_CPPFLAGS])
+AC_MSG_CHECKING([PLATFORM_CFLAGS])
+AC_MSG_RESULT([$PLATFORM_CFLAGS])
+AC_SUBST([PLATFORM_CFLAGS])
+AC_MSG_CHECKING([PLATFORM_LDFLAGS])
+AC_MSG_RESULT([$PLATFORM_LDFLAGS])
+AC_SUBST([PLATFORM_LDFLAGS])
+
+AC_OUTPUT([
+Makefile
+po/Makefile.in
+thunar-fnr/Makefile
+])
+
